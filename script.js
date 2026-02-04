@@ -46,32 +46,20 @@ function calculate() {
         const annualCadence = parseInt(row.querySelector('.prod-cadence').value);
         let costPerModel = 0;
 
-        // Pricing logic based on annual frequency
-        if (annualCadence >= 365) {
-            costPerModel = 200;
-        } else if (annualCadence >= 180) {
-            costPerModel = 300;
-        } else if (annualCadence >= 104) {
-            costPerModel = 350;
-        } else if (annualCadence >= 52) {
-            costPerModel = 450;
-        } else {
-            costPerModel = 450; // Default for below 1/week
-        }
+        if (annualCadence >= 365) costPerModel = 200;
+        else if (annualCadence >= 180) costPerModel = 300;
+        else if (annualCadence >= 104) costPerModel = 350;
+        else costPerModel = 450;
 
-        // Monthly cost for this specific product = (models per year * cost per model) / 12
         totalProductCost += (annualCadence * costPerModel) / 12;
     });
 
-    // Final Platform calculation with $2,500 floor
     const finalPlatform = Math.max(MIN_PLATFORM, totalProductCost);
-    
     const consultTotal = (parseInt(el.consulting.value) || 0) * CONSULT_RATE;
     const monthlyRecurring = finalPlatform + SUPPORT + consultTotal;
     const onboardingFee = parseFloat(el.onboard.value || 0);
     const yearOneTotal = (monthlyRecurring * 12) + onboardingFee;
 
-    // Update UI
     document.getElementById('monthlyTotal').innerText = Math.round(monthlyRecurring).toLocaleString();
     document.getElementById('yearOneTotal').innerText = Math.round(yearOneTotal).toLocaleString();
     document.getElementById('platformCost').innerText = '$' + Math.round(finalPlatform).toLocaleString();
@@ -82,8 +70,23 @@ function calculate() {
     badge.style.visibility = (finalPlatform === MIN_PLATFORM) ? 'visible' : 'hidden';
 }
 
+function resetCalculator() {
+    if (confirm("Reset all estimator values?")) {
+        el.products.value = 1;
+        el.consulting.value = 0;
+        el.onboard.value = 5000;
+        productContainer.innerHTML = '';
+        calculate();
+    }
+}
+
 function exportPDF() {
     const element = document.getElementById('capture-area');
+    const btn = document.getElementById('exportBtn');
+    
+    btn.innerText = "Generating...";
+    btn.disabled = true;
+
     const opt = {
         margin: 0.2,
         filename: 'MetricWorks_Proposal.pdf',
@@ -91,7 +94,16 @@ function exportPDF() {
         html2canvas: { scale: 2, backgroundColor: '#1e293b' },
         jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
     };
-    html2pdf().set(opt).from(element).save();
+
+    html2pdf().set(opt).from(element).save().then(() => {
+        btn.innerText = "Export Proposal PDF";
+        btn.disabled = false;
+        document.getElementById('successOverlay').style.display = 'flex';
+    });
+}
+
+function closeSuccess() {
+    document.getElementById('successOverlay').style.display = 'none';
 }
 
 inputs.forEach(id => el[id].addEventListener('input', calculate));
