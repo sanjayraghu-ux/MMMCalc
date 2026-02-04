@@ -1,79 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MetricWorks MMM Pricing Estimator</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-</head>
-<body>
-    <div class="calculator-container" id="capture-area">
-        <div class="input-panel">
-            <h1>MetricWorks MMM Pricing Estimator</h1>
-            <p class="desc">Define your marketing mix modeling scope with per-product granularity.</p>
+<div class="calculator-container" id="capture-area">
+    <div class="input-panel">
+        <h1>MetricWorks MMM Pricing Estimator</h1>
+        <p class="desc">Granular per-model pricing architect for scalable marketing intelligence.</p>
 
-            <div class="section-label">1. Account Scope</div>
-            <div class="control-group">
-                <label>Number of Brands</label>
-                <input type="number" id="brands" min="1" max="10" value="1">
-            </div>
-
-            <div class="control-group">
-                <label>Number of Products</label>
-                <input type="number" id="products" min="1" max="20" value="1">
-            </div>
-
-            <div class="section-label">2. Product Configuration (Cadence per Product)</div>
-            <div id="productNameInputs" class="dynamic-inputs">
-                </div>
-
-            <div class="section-label">3. Add-ons & Implementation</div>
-            <div class="control-group">
-                <label>Strategy Consulting (Hours)</label>
-                <input type="number" id="consulting" min="0" max="100" value="0">
-            </div>
-
-            <div class="control-group">
-                <label>Onboarding Fee ($)</label>
-                <input type="number" id="onboard" value="5000" step="500">
-            </div>
+        <div class="section-label">1. Product Inventory</div>
+        <div class="control-group">
+            <label>Total Number of Products</label>
+            <input type="number" id="products" min="1" max="20" value="1">
         </div>
 
-        <div class="display-panel">
-            <div class="summary-card annual-summary">
-                <div class="price-header">Year 1 Total Investment</div>
-                <div class="secondary-price">$<span id="yearOneTotal">0</span></div>
-                <p class="small-note">Total TCO (Service + Onboarding)</p>
-            </div>
+        <div class="section-label">2. Product Configuration & Cadence</div>
+        <div id="productNameInputs" class="dynamic-inputs"></div>
 
-            <div class="summary-card">
-                <div class="price-header">Monthly Recurring Fee</div>
-                <div class="main-price">$<span id="monthlyTotal">0</span></div>
-                <div class="status-badge" id="minFeeBadge">Min Platform Fee Applied</div>
-                
-                <div class="breakdown">
-                    <div class="item">
-                        <span>Aggregate Platform (Min $2,500)</span>
-                        <span id="platformCost">$0</span>
-                    </div>
-                    <div class="item">
-                        <span>Standard Support</span>
-                        <span>$750</span>
-                    </div>
-                    <div class="item">
-                        <span>Consulting (@ $250/hr)</span>
-                        <span id="consultCost">$0</span>
-                    </div>
-                    <div class="item total-row">
-                        <span>One-Time Onboarding</span>
-                        <span id="oneTimeTotal">$0</span>
-                    </div>
-                </div>
-            </div>
-            <button class="export-btn" onclick="exportPDF()">Export Proposal PDF</button>
+        <div class="section-label">3. Service & Implementation</div>
+        <div class="control-group">
+            <label>Strategy Consulting (Monthly Hours)</label>
+            <input type="number" id="consulting" min="0" max="100" value="0">
+        </div>
+
+        <div class="control-group">
+            <label>Onboarding Fee (One-Time)</label>
+            <input type="number" id="onboard" value="5000" step="500">
         </div>
     </div>
-    <script src="script.js"></script>
-</body>
-</html>
+
+    <div class="display-panel">
+        </div>
+</div>
