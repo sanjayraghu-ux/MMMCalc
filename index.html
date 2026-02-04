@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMM Pricing Architect</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="calculator-container" id="capture-area">
+        <div class="input-panel">
+            <h1>MaaS Pricing</h1>
+            <p class="desc">Configure your Marketing Mix Modeling scope.</p>
+
+            <div class="control-group">
+                <label>Number of Brands: <span id="brandLabel">1</span></label>
+                <input type="range" id="brands" min="1" max="5" value="1">
+            </div>
+
+            <div class="control-group">
+                <label>Products per Brand: <span id="productLabel">2</span></label>
+                <input type="range" id="products" min="1" max="15" value="2">
+            </div>
+
+            <div class="control-group">
+                <label>Refresh Frequency</label>
+                <select id="frequency">
+                    <option value="1">Quarterly Refresh (Static)</option>
+                    <option value="1.5" selected>Monthly Refresh (Agile)</option>
+                    <option value="2.5">Weekly Sync (Real-Time)</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Support Level</label>
+                <select id="support">
+                    <option value="0">Standard (Email)</option>
+                    <option value="1500">Premium (Slack + 4h Monthly Consulting)</option>
+                    <option value="4000">Enterprise (White-Glove Strategic)</option>
+                </select>
+            </div>
+
+            <div class="fees-grid">
+                <div class="control-group">
+                    <label>Onboarding Fee ($)</label>
+                    <input type="number" id="onboard" value="3500">
+                </div>
+                <div class="control-group">
+                    <label>Handoff Fee ($)</label>
+                    <input type="number" id="handoff" value="1500">
+                </div>
+            </div>
+        </div>
+
+        <div class="display-panel">
+            <div class="summary-card">
+                <div class="price-header">Monthly Recurring</div>
+                <div class="main-price">$<span id="monthlyTotal">0</span></div>
+                <p class="frequency-text">Billed monthly per model instance</p>
+                
+                <hr>
+
+                <div class="breakdown">
+                    <div class="item">
+                        <span>Setup Investment</span>
+                        <span id="oneTimeTotal">$0</span>
+                    </div>
+                    <div class="item">
+                        <span>Model Complexity</span>
+                        <span id="complexityTag">Low</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="export-btn" onclick="exportPDF()">Download PDF Proposal</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
