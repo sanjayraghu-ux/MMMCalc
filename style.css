@@ -19,53 +19,64 @@ body {
 
 .calculator-container {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1.1fr 0.9fr;
     background: var(--card);
-    width: 1000px;
+    width: 1100px;
     border-radius: 24px;
-    overflow: hidden;
     box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
 }
 
 .input-panel { padding: 40px; border-right: 1px solid var(--accent); }
 .display-panel { padding: 40px; background: #161e2e; display: flex; flex-direction: column; gap: 20px; }
 
-h1 { margin: 0; font-size: 24px; line-height: 1.2; }
-.desc { color: var(--muted); font-size: 14px; margin-bottom: 25px; margin-top: 10px; }
+h1 { margin: 0; font-size: 22px; color: #fff; }
+.desc { color: var(--muted); font-size: 13px; margin: 10px 0 20px; }
 
 .section-label {
-    font-size: 11px; font-weight: 700; text-transform: uppercase;
-    color: var(--primary); margin: 25px 0 10px; letter-spacing: 1px;
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    color: var(--primary); margin: 25px 0 12px; letter-spacing: 1px;
 }
 
 .control-group { margin-bottom: 15px; }
-label { display: block; font-size: 13px; margin-bottom: 8px; color: #cbd5e1; }
+label { display: block; font-size: 13px; margin-bottom: 6px; color: #cbd5e1; }
 
-.dynamic-inputs {
-    background: rgba(0,0,0,0.2); padding: 12px; border-radius: 12px;
-    max-height: 180px; overflow-y: auto; margin-bottom: 10px;
-}
-
-.product-name-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-.product-name-row span { font-size: 11px; color: var(--muted); min-width: 70px; }
-
-input[type="range"] { width: 100%; accent-color: var(--primary); cursor: pointer; }
-input[type="number"], select, .product-name-row input {
+input[type="number"], select {
     width: 100%; padding: 10px; border: 1px solid var(--accent);
-    border-radius: 8px; background: #0f172a; color: #fff;
+    border-radius: 8px; background: #0f172a; color: #fff; outline: none;
 }
 
+/* Dynamic Row Styling */
+.dynamic-inputs {
+    background: rgba(0,0,0,0.2); border-radius: 12px; padding: 10px;
+    max-height: 350px; overflow-y: auto; border: 1px solid var(--accent);
+}
+
+.product-row {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #334155;
+}
+
+.product-row:last-child { border-bottom: none; margin-bottom: 0; }
+
+.product-row input, .product-row select {
+    font-size: 12px;
+    padding: 8px;
+}
+
+/* Summary Styles */
 .summary-card { background: var(--card); padding: 25px; border-radius: 20px; text-align: center; }
 .annual-summary { border: 1px solid var(--primary); background: rgba(99, 102, 241, 0.05); }
-
-.main-price { font-size: 48px; font-weight: 800; color: #fff; margin: 5px 0; }
-.secondary-price { font-size: 32px; font-weight: 800; color: var(--primary); }
-
-.price-header { font-size: 11px; text-transform: uppercase; color: var(--muted); letter-spacing: 1px; }
+.main-price { font-size: 44px; font-weight: 800; color: #fff; margin: 5px 0; }
+.secondary-price { font-size: 28px; font-weight: 800; color: var(--primary); }
+.price-header { font-size: 10px; text-transform: uppercase; color: var(--muted); letter-spacing: 1px; }
 
 .status-badge {
     display: inline-block; background: rgba(99, 102, 241, 0.2); color: var(--primary);
-    padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 700; margin-bottom: 15px;
+    padding: 4px 12px; border-radius: 20px; font-size: 9px; font-weight: 700; margin-bottom: 15px;
 }
 
 .breakdown { margin-top: 15px; text-align: left; }
@@ -78,5 +89,3 @@ input[type="number"], select, .product-name-row input {
 }
 
 .small-note { font-size: 11px; color: var(--muted); margin: 5px 0 0; }
-
-@media (max-width: 900px) { .calculator-container { grid-template-columns: 1fr; width: 100%; } }
